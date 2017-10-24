@@ -1,4 +1,4 @@
 # KBC
 JAVA
-KBC is a game which mimick the original Kaun Banega Crorepati..
+KBC is a game which mimicks the original Kaun Banega Crorepati..
 still under developement
