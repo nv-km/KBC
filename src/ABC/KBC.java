@@ -10,21 +10,10 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
  
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-/**
- *
- * @author asus
- */
 public class KBC extends javax.swing.JFrame {
 
-    /**
-     * Creates new form KBC
-     */
     public KBC() {
         initComponents();
     }
@@ -350,35 +339,31 @@ public class KBC extends javax.swing.JFrame {
         jTextField4.setBackground(Color.BLACK);
         jTextField5.setBackground(Color.BLACK);
         try
-            {
+        {
                
             resultSet = statement.executeQuery("SELECT Question,Option1,Option2,Option3,Option4,CorrectAnswer FROM KBCquestions where QuestionNumber="+(k++));
         
             while(resultSet.next()) {
-              jTextField1.setText(resultSet.getString("Question"));
-              jTextField2.setText(resultSet.getString("Option1"));
-              jTextField3.setText(resultSet.getString("Option2"));
-              jTextField4.setText(resultSet.getString("Option3"));
-              jTextField5.setText(resultSet.getString("Option4"));
-              answer=resultSet.getString("CorrectAnswer");
-              option1=resultSet.getString("Option1");
-              option2=resultSet.getString("Option2");
-              option3=resultSet.getString("Option3");
-              option4=resultSet.getString("Option4");
+                jTextField1.setText(resultSet.getString("Question"));
+                jTextField2.setText(resultSet.getString("Option1"));
+                jTextField3.setText(resultSet.getString("Option2"));
+                jTextField4.setText(resultSet.getString("Option3"));
+                jTextField5.setText(resultSet.getString("Option4"));
+                answer=resultSet.getString("CorrectAnswer");
+                option1=resultSet.getString("Option1");
+                option2=resultSet.getString("Option2");
+                option3=resultSet.getString("Option3");
+                option4=resultSet.getString("Option4");
             }
         
             
-            }
+        }
             catch(SQLException e)
-            {
-        
-            
-            }    
+            { }    
         if(k==16)
         {
         try {
                 if(null != connection) {
- 
                     // cleanup resources, once after processing
                     resultSet.close();
                     statement.close();
@@ -420,13 +405,9 @@ public class KBC extends javax.swing.JFrame {
         
         SelectedAnswer=jTextField2.getText();
         if(SelectedAnswer.equals(answer))
-        {
             jTextField2.setBackground(Color.GREEN);
-        }
         else
-        {
              jTextField2.setBackground(Color.RED);
-        }
         
     }//GEN-LAST:event_jTextField2MouseClicked
 
@@ -437,40 +418,25 @@ public class KBC extends javax.swing.JFrame {
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
         SelectedAnswer=jTextField3.getText();
         if(SelectedAnswer.equals(answer))
-        {
             jTextField3.setBackground(Color.GREEN);
-        }
         else
-        {
              jTextField3.setBackground(Color.RED);
-        }
-        
     }//GEN-LAST:event_jTextField3MouseClicked
 
     private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
         SelectedAnswer=jTextField4.getText();
         if(SelectedAnswer.equals(answer))
-        {
             jTextField4.setBackground(Color.GREEN);
-        }
         else
-        {
-             jTextField4.setBackground(Color.RED);
-        }
-        
+             jTextField4.setBackground(Color.RED);        
     }//GEN-LAST:event_jTextField4MouseClicked
 
     private void jTextField5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField5MouseClicked
         SelectedAnswer=jTextField5.getText();
         if(SelectedAnswer.equals(answer))
-        {
             jTextField5.setBackground(Color.GREEN);
-        }
         else
-        {
-             jTextField5.setBackground(Color.RED);
-        }
-        
+             jTextField5.setBackground(Color.RED);        
     }//GEN-LAST:event_jTextField5MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -478,9 +444,7 @@ public class KBC extends javax.swing.JFrame {
         ChangeQuestion();
                        ImageIcon[] imglist1 = new ImageIcon[1];
         for(int i=0;i<imglist1.length;i++)
-        { 
             imglist1[i] = new ImageIcon(getClass().getResource("/ABC/images/mp"+k+".jpg"));
-        }
         if(mp<0)
             mp=1;
         jLabel6.setIcon(imglist1[mp]);
@@ -505,6 +469,7 @@ public class KBC extends javax.swing.JFrame {
             System.out.println("Problem in loading or "
                     + "registering MS Access JDBC driver");
         }
+
         try {
  
             String msAccDB = "C:\\Sayali\\KBCquestions.accdb";
@@ -513,13 +478,11 @@ public class KBC extends javax.swing.JFrame {
             connection = DriverManager.getConnection(dbURL); 
             statement = connection.createStatement();
             
-        }
-        
-        
-        
-        catch(SQLException sqlex){
+        }        
+        catch(SQLException sqlex) {
             sqlex.printStackTrace();
         }
+
         java.awt.EventQueue.invokeLater(() -> {
             new KBC().setVisible(true);
         });
